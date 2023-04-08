@@ -6,29 +6,38 @@ public class Main {
 
         double sum = 0.0;
         double count = 0.0;
+        boolean first = false;
 
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] < 0) {
-                for (int i1 = i + 1; i1 < numbers.length; i1++) {
-                    if (numbers[i1] > 0) {
-                        sum = sum + numbers[i1];
-                        count++;
-                    }
-                }
-                break;
+        for (double answer : numbers) {
+            if (answer < 0) {
+                first = true;
+            } else if (first) {
+                sum += answer;
+                count++;
             }
         }
-        System.out.println("Среднее арифметтическое: " + sum / count);
+        if (first) {
+            double result = sum / count;
+            System.out.println("Среднее арифметическое: " + result);
+        }
 
-        for (int i = 0; i < numbers.length - 1; i++) {
-            for (int j = 0; j < numbers.length - i - 1; j++) {
-                if (numbers[j] > numbers[j + 1]) {
-                    double num = numbers[j];
-                    numbers[j] = numbers[j + 1];
-                    numbers[j + 1] = num;
+        double[] mas = {3.9, -1.3, 3.2, 2.9, -2.3, 3.3, 4.8, 3.8, 2.2, 9.8, -4.8, 3.4, -2.1, 9.5, -9.0};
+
+        boolean sort = false;
+        double buf;
+        while (!sort) {
+            sort = true;
+            for (int i = 0; i < mas.length - 1; i++) {
+                if (mas[i] > mas[i + 1]) {
+                    sort = false;
+
+                    buf = mas[i];
+                    mas[i] = mas[i + 1];
+                    mas[i + 1] = buf;
                 }
             }
         }
-        System.out.println(Arrays.toString(numbers));
+        System.out.println(Arrays.toString(mas));
+
     }
 }
